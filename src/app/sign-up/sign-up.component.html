@@ -1,0 +1,95 @@
+<div class="main-container">
+  <form #myform="ngForm" (ngSubmit)="signUp(myform.value)">
+
+    <div class="form-group">
+      <label for="username" name="username">Username</label>
+      <input ngModel class="form-control" name="username" id="username" #username="ngModel" minlength="3" required
+             maxlength="10">
+    </div>
+
+    <div class="alert alert-danger" *ngIf="username.touched && !username.valid">
+
+      <div *ngIf="username.errors.required">
+        Firstname is required
+      </div>
+      <div *ngIf="username.errors.minlength">
+        Firstname minimum length is
+        {{ username.errors.minlength.requiredLength }}
+      </div>
+      <div *ngIf="username.errors.maxlength">
+        Firstname maximum length is
+        {{ firstName.errors.maxlength.requiredLength }}
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="name" name="name">Name</label>
+      <input ngModel class="form-control" name="name" id="name" #name="ngModel" required>
+    </div>
+
+    <div class="alert-danger alert" *ngIf="name.touched && !name.valid">
+      <div *ngIf="name.errors.required">
+        Name is Required
+      </div>
+    </div>
+
+    <div class="form-group">
+
+      <label for="email" name="username">Email</label>
+      <input ngModel class="form-control" name="email" id="email" #email="ngModel" email>
+    </div>
+    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+      <div *ngIf="email.errors.email">
+        Enter Valid Email Id
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password" name="password">Password</label>
+    <input class="form-control" type="password"  pattern="[A-Za-z0-9]{0,5}" ngModel name="password" #password="ngModel" id="password" required/>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="!password.valid && password.touched">
+      <div *ngIf="password.errors.required">
+        Password is Required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirm" name="confirm">Confirm Password</label>
+      <input class="form-control" type="password"  pattern="[A-Za-z0-9]{0,5}" ngModel name="confirm" #confirm="ngModel" id="confirm" required [equalTo]="password"/>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="!confirm.valid && confirm.touched">
+      <div *ngIf="confirm.errors?.equalTo">
+        Password Mismatch
+      </div>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="phone" name="username">Phone Number</label>
+      <input ngModel class="form-control" name="phone " id="phone" #phone="ngModel">
+
+    </div>
+
+    <div class="form-group input-group">
+      <label>Gender</label>
+      <div class="radio" *ngFor="let gender of genderCategory">
+        <label>
+          <input ngModel type="radio" name="gender" [value]="gender.name">
+          {{gender.name}}
+        </label>
+      </div>
+    </div>
+
+
+    <input [disabled]="!myform.valid" type="submit" class="btn btn-success ">
+
+
+  </form>
+
+
+</div>
